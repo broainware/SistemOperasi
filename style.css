@@ -184,6 +184,32 @@ body {
 .theme-btn:hover {
   transform: scale(1.1);
 }
+
+/* TAMBAH: Gaya untuk Ikon SVG di Theme Toggle */
+.theme-btn svg {
+  display: none; /* Sembunyikan semua SVG secara default */
+  width: 24px;
+  height: 24px;
+}
+
+/* Aturan untuk ikon Bulan (indeks 0 - Mode Gelap) */
+.theme-btn svg:first-child {
+  display: block;
+}
+
+/* Aturan untuk ikon Matahari (indeks 1 - Mode Terang) */
+.theme-btn svg:last-child {
+  display: none;
+}
+
+/* Saat Dark Mode AKTIF (kelas ditambahkan oleh JS) */
+.theme-btn.dark-mode-active svg:first-child {
+  display: none; /* Sembunyikan Bulan */
+}
+.theme-btn.dark-mode-active svg:last-child {
+  display: block; /* Tampilkan Matahari */
+}
+
 /* ------------------------------------------------------
    HERO
 ------------------------------------------------------ */
