@@ -18,19 +18,32 @@ closeSidebarBtn.addEventListener("click", () => {
 ========================================================== */
 const themeToggle = document.getElementById("themeToggle");
 
+// Fungsi untuk memperbarui ARIA dan penampilan ikon SVG
+function updateThemeAppearance(mode) {
+  const isDark = mode === "dark";
+  themeToggle.setAttribute("aria-pressed", isDark);
+  themeToggle.setAttribute(
+    "aria-label",
+    isDark ? "Aktifkan Mode Terang" : "Aktifkan Mode Gelap"
+  );
+  // Tambah: Menambahkan kelas untuk mengontrol penampilan SVG (lihat CSS)
+  themeToggle.classList.toggle("dark-mode-active", isDark);
+}
+
 // Apply saved theme
 const savedTheme = localStorage.getItem("theme");
+let initialTheme;
 
 if (savedTheme) {
-  document.documentElement.setAttribute("data-theme", savedTheme);
-  updateThemeIcon(savedTheme);
+  initialTheme = savedTheme;
 } else {
   // Detect OS theme (fallback)
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const systemTheme = prefersDark ? "dark" : "light";
-  document.documentElement.setAttribute("data-theme", systemTheme);
-  updateThemeIcon(systemTheme);
+  initialTheme = prefersDark ? "dark" : "light";
 }
+
+document.documentElement.setAttribute("data-theme", initialTheme);
+updateThemeAppearance(initialTheme);
 
 themeToggle.addEventListener("click", () => {
   let current = document.documentElement.getAttribute("data-theme");
@@ -39,16 +52,8 @@ themeToggle.addEventListener("click", () => {
   document.documentElement.setAttribute("data-theme", newTheme);
   localStorage.setItem("theme", newTheme);
 
-  updateThemeIcon(newTheme);
+  updateThemeAppearance(newTheme);
 });
-
-function updateThemeIcon(mode) {
-  if (mode === "dark") {
-    themeToggle.innerHTML = "<i class='bx bx-sun'></i>";
-  } else {
-    themeToggle.innerHTML = "<i class='bx bx-moon'></i>";
-  }
-}
 
 /* ==========================================================
    TITLE FLOAT ANIMATION BASED ON MOUSE
