@@ -112,7 +112,7 @@ body {
 }
 
 .close-sidebar-btn:hover {
-  color: var(--primary);
+  color: var(--bg);
   transform: scale(1.1);
 }
 
