@@ -100,7 +100,6 @@ body {
   position: absolute;
   top: 15px;
   right: 15px;
-  display: none; /* Sembunyikan secara default di desktop */
   background: none;
   border: none;
   color: var(--text-alt);
